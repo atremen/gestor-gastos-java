@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import static java.lang.System.out;
 
 public class Main {
@@ -23,8 +22,17 @@ public class Main {
         return PosicionGastoMayor;
     }
 
-    public static double calcularTotalPorCategoria(ArrayList<String> categorias, ArrayList<Double> montos, String categoriaBuscada){
+    public static double calcularTotalPorCategoria(ArrayList<String> categorias,
+                                                   ArrayList<Double> montos,
+                                                   String categoriaBuscada,
+                                                   ArrayList<Double> montosAlimentos,
+                                                   ArrayList<Double> montosTransporte,
+                                                   ArrayList<Double> montosMaterialesEscolares,
+                                                   ArrayList<Double> montosEntretenimiento,
+                                                   ArrayList<Double> montosOtros,
+                                                   Scanner scanner){
         boolean categoriaValida = false;
+        String categoria = "";
         while (!categoriaValida) {
             out.println("Categorías disponibles: Alimentos, Transporte, Materiales Escolares, Entretenimiento, Otros");
             out.print("Ingrese la categoría: ");
@@ -32,8 +40,8 @@ public class Main {
 
             if (categoria.equalsIgnoreCase("Alimentos") ||
                     categoria.equalsIgnoreCase("Transporte") ||
-                    categoria.equalsIgnoreCase("Materiales Escolares")
-                    || categoria.equalsIgnoreCase("Entretenimiento") ||
+                    categoria.equalsIgnoreCase("Materiales Escolares") ||
+                    categoria.equalsIgnoreCase("Entretenimiento") ||
                     categoria.equalsIgnoreCase("Otros")) {
                 categoriaValida = true;
             } else {
@@ -44,66 +52,49 @@ public class Main {
         int numCategoria;
         float total = 0;
         if(categoriaBuscada.equalsIgnoreCase("Alimentos"){
-            for(float item:montosAlimentos){
+            for(Double item:montosAlimentos){
                 total += item;
             }
         }
         if(categoriaBuscada.equalsIgnoreCase("Transporte"){
-            for(float item:montosTransporte){
+            for(Double item:montosTransporte){
                 total += item;
             }
         }
         if(categoriaBuscada.equalsIgnoreCase("Materiales Escolares"){
-            for(float item:montosMaterialesEscolares){
+            for(Double item:montosMaterialesEscolares){
                 total += item;
             }
         }
         if(categoriaBuscada.equalsIgnoreCase("Entretenimiento"){
-            for(float item:montosEntretenimiento){
+            for(Double item:montosEntretenimiento){
                 total += item;
             }
         }
         if(categoriaBuscada.equalsIgnoreCase("Otros")){
-            for(float item:montosOtros){
+            for(Double item:montosOtros){
                 total += item;
             }
         }
         return total;
     }
 
-    public static void mostrarResumen(ArrayList<String> conceptos, ArrayList<String> categorias, ArrayList<Double> montos, float total){
-        System.out.println("\nRESUMEN SEMANAL\n");
-        System.out.println("\nNumero de gastos: %d", montos.size() );
-        System.out.println("\nGasto total: $%.2f", total);
-        System.out.println("\nPromedio por gasto: $%.2f");
+    public static void mostrarResumen(ArrayList<String> conceptos, ArrayList<String> categorias, ArrayList<Double> montos, float total, int posicionGastoMayor){
+        float promedio = total / montos.size();
+        out.print("\nRESUMEN SEMANAL\n");
+        out.printf("\nNumero de gastos: %d", montos.size() );
+        out.printf("\nGasto total: $%.2f", total);
+        out.printf("\nPromedio por gasto: $%.2f", promedio);
+        out.printf("\nGasto mayor: %s, %.2f", conceptos.get(posicionGastoMayor), montos.get(posicionGastoMayor) );
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Gestor semanal de gastos");
 
         ArrayList<String> conceptos = new ArrayList<>();
         String[] categorias = new String[5];
         double[] montos = new double[5];
-
-        categorias[0] = "Alimentos";
-        conceptos.add("Cheeseburger");
-        conceptos.add("Pizza pizza");
-        conceptos.add("YUMMY :P");
-        conceptos.add(1, "NOM NOM NOM");
-
-        for(String item:conceptos){
-            System.out.println(item);
-        }
-
-        if(conceptos.contains("Cheeseburger")){
-            System.out.println("\nmmm cheeseburger");
-        }
-
-        //System.out.println(categorias[0]);
-        //System.out.println(conceptos.get(2));
-
-
-
 
     }
 
