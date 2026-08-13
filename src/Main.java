@@ -98,4 +98,19 @@ public class Main {
 
     }
 
+    public static void mostrarGastos(
+            ArrayList<String> conceptos,
+            ArrayList<String> categorias,
+            ArrayList<Double> montos) {
+
+        out.println("\nGASTOS REGISTRADOS\n");
+
+        for (int i = 0; i < conceptos.size(); i++) {
+            out.printf("%d. %-11s | %-10s | $%.2f\n",
+                    (i + 1),
+                    conceptos.get(i),
+                    categorias.get(i),
+                    montos.get(i));
+        }
+    }
 }
