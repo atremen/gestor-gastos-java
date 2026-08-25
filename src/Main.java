@@ -86,7 +86,7 @@ public class Main {
     }
 
     public static void mostrarMenu(){
-        System.out.println("1) Registrar nuevo gasto");
+        System.out.println("\n1) Registrar nuevo gasto");
         System.out.println("2) Mostrar todos los gastos");
         System.out.println("3) Mostrar total de gastos");
         System.out.println("4) Mostrar gasto mayor");
