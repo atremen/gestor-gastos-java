@@ -1,20 +1,13 @@
 Gestor de gastos en Java
 
-\nIntegrantes:
-
+Integrantes:
   -Aarón Trejo (Estudiante A)
-  
   -Diego Alberto Dávalos Salinas (Estudiante B)
-  
 
 Responsabilidades de cada integrante:
-
   -Aarón Trejo:
-  
     Implementación de los métodos para registro de gastos, mostrar los gastos, mostrar el resumen de gastos.
-    
   -Diego Alberto Dávalos Salinas:
-  
     Implementación de los métodos para calcular el total de gastos, obtener y mostrar gasto mayor, calcular y consultar el gasto por categoria.
 
 Instrucciones para ejecutar el programa
