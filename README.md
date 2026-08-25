@@ -1,7 +1,6 @@
 Gestor de gastos en Java
 
-
-Integrantes:
+\nIntegrantes:
 
   -Aarón Trejo (Estudiante A)
   
