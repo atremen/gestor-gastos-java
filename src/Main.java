@@ -4,6 +4,57 @@ import static java.lang.System.out;
 
 public class Main {
 
+    public static void registrarGasto(
+            ArrayList<String> conceptos,
+            ArrayList<String> categorias,
+            ArrayList<Double> montos,
+            Scanner scanner) {
+
+        out.print("\nIngrese el concepto: ");
+        String concepto = scanner.nextLine();
+
+        String categoria = "";
+        boolean categoriaValida = false;
+
+        while (!categoriaValida) {
+            out.println("Categorías disponibles: Alimentos, Transporte, Materiales Escolares, Entretenimiento, Otros");
+            out.print("Ingrese la categoría: ");
+            categoria = scanner.nextLine();
+
+            if (categoria.equalsIgnoreCase("Alimentos") ||
+                    categoria.equalsIgnoreCase("Transporte") ||
+                    categoria.equalsIgnoreCase("Materiales Escolares")
+                    || categoria.equalsIgnoreCase("Entretenimiento") ||
+                    categoria.equalsIgnoreCase("Otros")) {
+                categoriaValida = true;
+            } else {
+                out.println("Categoría no válida. Intente de nuevo.");
+            }
+        }
+
+        double monto = 0;
+
+        while (monto <= 0) {
+            out.print("Ingrese el monto: ");
+            if (scanner.hasNextDouble()) {
+                monto = scanner.nextDouble();
+                if (monto <= 0) {
+                    out.println("Error: El monto debe ser mayor a cero.");
+                }
+            } else {
+                out.println("Error: Ingrese un valor numérico.");
+                scanner.next();
+            }
+        }
+        scanner.nextLine(); // Limpiar el buffer
+
+        conceptos.add(concepto);
+        categorias.add(categoria);
+        montos.add(monto);
+
+        out.println("¡Gasto registrado exitosamente!");
+    }
+      
     public static double calcularTotal(ArrayList<Double> montos){
         double Total=0;
         for(double item:montos){
@@ -28,23 +79,10 @@ public class Main {
         double total = 0.0;
         for(int i = 0; i < categorias.size(); i++){
             if( categorias.get(i).equalsIgnoreCase(categoriaBuscada )){
-                total += montos.get(i);
+                total += montos.get(i);                                      
             }
         }
         return total;
-    }
-
-    public static void mostrarResumen(ArrayList<String>conceptos,
-                                      ArrayList<String> categorias,
-                                      ArrayList<Double> montos,
-                                      float total,
-                                      int posicionGastoMayor){
-        float promedio = total / montos.size();
-        out.print("\nRESUMEN SEMANAL\n");
-        out.printf("\nNumero de gastos: %d", montos.size() );
-        out.printf("\nGasto total: $%.2f", total);
-        out.printf("\nPromedio por gasto: $%.2f", promedio);
-        out.printf("\nGasto mayor: %s, %.2f", conceptos.get(posicionGastoMayor), montos.get(posicionGastoMayor) );
     }
 
     public static void mostrarMenu(){
@@ -138,12 +176,34 @@ public class Main {
 
         out.println("\nGASTOS REGISTRADOS\n");
 
+        if (conceptos.isEmpty()) {
+            out.println("No hay gastos registrados.");
+            return;
+        }
+
         for (int i = 0; i < conceptos.size(); i++) {
-            out.printf("%d. %-11s | %-10s | $%.2f\n",
+            out.printf("%d. %-15s | %-20s | $%.2f\n",
                     (i + 1),
                     conceptos.get(i),
                     categorias.get(i),
                     montos.get(i));
         }
+    }
+
+    public static void mostrarResumen(
+            ArrayList<String> conceptos,
+            ArrayList<String> categorias,
+            ArrayList<Double> montos) {
+
+        out.println("\n--- RESUMEN DE GASTOS ---");
+
+        if (conceptos.isEmpty()) {
+            out.println("Aún no hay gastos registrados para mostrar un resumen.");
+            return;
+        }
+
+        out.println("Total de movimientos: " + conceptos.size());
+        out.printf("Gasto total acumulado: $%.2f\n", calcularTotal(montos));
+        out.println("-------------------------");
     }
 }
